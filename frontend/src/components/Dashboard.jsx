@@ -3,9 +3,10 @@ import axios from 'axios';
 
 function Dashboard({ user, token }) {
   const [posts, setPosts] = useState([]);
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [error, setError] = useState('');
+  const [title, setTitle] = useState();
+  const [content, setContent] = useState();
+  const [error, setError] = useState();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchPosts();
@@ -15,14 +16,22 @@ function Dashboard({ user, token }) {
     try {
       const response = await axios.get('/posts');
       setPosts(response.data);
+      setLoading(false);
     } catch (err) {
       console.error('Failed to fetch posts:', err);
+      setError('无法加载文章列表');
+      setLoading(false);
     }
   };
 
   const createPost = async (e) => {
     e.preventDefault();
     setError('');
+
+    if (!title || !content) {
+      setError('请填写标题和内容');
+      return;
+    }
 
     try {
       await axios.post(
@@ -35,6 +44,7 @@ function Dashboard({ user, token }) {
       setContent('');
       fetchPosts();
     } catch (err) {
+      console.error('Create post error:', err);
       setError(err.response?.data?.error || '创建失败');
     }
   };
@@ -48,9 +58,14 @@ function Dashboard({ user, token }) {
       });
       fetchPosts();
     } catch (err) {
-      console.error('Failed to delete post:', err);
+      console.error('Delete post error:', err);
+      setError('删除失败');
     }
   };
+
+  if (loading) {
+    return <div className="text-center text-gray-600">加载中...</div>;
+  }
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -69,7 +84,7 @@ function Dashboard({ user, token }) {
             <label className="block text-gray-700 mb-2">标题</label>
             <input
               type="text"
-              value={title}
+              value={title || ''}
               onChange={(e) => setTitle(e.target.value)}
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
               required
@@ -79,7 +94,7 @@ function Dashboard({ user, token }) {
           <div className="mb-4">
             <label className="block text-gray-700 mb-2">内容</label>
             <textarea
-              value={content}
+              value={content || ''}
               onChange={(e) => setContent(e.target.value)}
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 h-32"
               required
@@ -122,6 +137,7 @@ function Dashboard({ user, token }) {
 
                 {post.user_id === user.id && (
                   <button
+                    type="button"
                     onClick={() => deletePost(post.id)}
                     className="mt-3 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
                   >

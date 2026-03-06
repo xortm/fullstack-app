@@ -30,6 +30,7 @@ function Login({ onLogin }) {
         onLogin(response.data.user, response.data.token);
       }
     } catch (err) {
+      console.error('Login error:', err);
       setError(err.response?.data?.error || '操作失败');
     }
   };
@@ -91,6 +92,7 @@ function Login({ onLogin }) {
       </form>
 
       <button
+        type="button"
         onClick={() => setIsRegister(!isRegister)}
         className="w-full mt-4 text-purple-500 hover:text-purple-600"
       >
