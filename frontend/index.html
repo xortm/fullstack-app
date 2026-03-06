@@ -1,13 +1,82 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全栈应用</title>
+    <style>
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        p {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .tech-stack {
+            text-align: left;
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .tech-item {
+            padding: 5px 0;
+            color: #333;
+        }
+        
+        .success {
+            color: #10b981;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 全栈应用部署成功！</h1>
+        
+        <p>这是一个完整的全栈应用，整合了前端和后端。</p>
+        
+        <div class="tech-stack">
+            <p><strong>技术栈：</strong></p>
+            <div class="tech-item">✅ React 18</div>
+            <div class="tech-item">✅ Vite 7</div>
+            <div class="tech-item">✅ Express</div>
+            <div class="tech-item">✅ SQLite</div>
+            <div class="tech-item">✅ JWT 认证</div>
+            <div class="tech-item">✅ Tailwind CSS</div>
+        </div>
+        
+        <p class="success">
+            前端已成功部署到 GitHub Pages！
+        </p>
+        
+        <p style="font-size: 0.9em; color: #999; margin-top: 30px;">
+            部署时间: 2026-03-06 18:55 GMT+8
+        </p>
+    </div>
+</body>
 </html>
